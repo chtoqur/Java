@@ -2,11 +2,17 @@ public class Account {
     
     // 잔고 필드
     private int balance;
+    private String accountNum;
+    private String name;
+    private int initialDeposit;
 
     // 생성자
     public Account()
     {
         balance = 0;
+        accountNum = null;
+        name = null;
+        initialDeposit = 0;
     }
 
     // 음수값이 될 수 없도록 세터
