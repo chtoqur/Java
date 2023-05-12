@@ -9,5 +9,9 @@ public class PrinterExam {
         Printer.println(true);
         Printer.println(5.7);
         Printer.println("홍길동");
+
+        // 오버로딩 시 주의할 점
+        // 디폴트 파라메터
+        
     }
 }

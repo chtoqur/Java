@@ -3,17 +3,16 @@ public class AccountExam {
         
         Account account = new Account();
 
-        account.setBalance(10000);
+        account.setBalance(-5);
         System.out.println("현재 잔고: " + account.getBalance());
 
-        account.setBalance(-100);
+        account.setBalance(10000001);
         System.out.println("현재 잔고: " +  account.getBalance());
 
-        account.setBalance(2000000);
+        account.setBalance(20900);
         System.out.println("현재 잔고: " +  account.getBalance());
 
-        account.setBalance(300000);
-        System.out.println("현재 잔고: " +  account.getBalance());
+
 
     }
 }
