@@ -72,6 +72,11 @@ public class Account {
     {
         int total = balance + money;
 
+        if (money < MIN_BALANCE)
+        {
+            return false;
+        }
+
         if ((total < MIN_BALANCE) || (total > MAX_BALANCE))
         {
             return false;
@@ -88,15 +93,18 @@ public class Account {
     {
         int total = this.balance - money;
 
+        if (money < MIN_BALANCE)
+        {
+            return false;
+        }
+        
         if ((total < MIN_BALANCE) || (total > MAX_BALANCE))
         {
             return false;
         }
-        else
-        {
-            this.balance = total;
-            return true;
-        }
+
+        this.balance = total;
+        return true;
     }
 
 }
