@@ -179,7 +179,7 @@ public class Bank {
                     break;
             }
         }
-        while(select != 5);
+        while(select != 6);
         {
             System.out.println("Bye!");
         }

@@ -19,7 +19,6 @@ public class Answer_Account {
         this.balance = balance;
     }
 
-    
     public String getNumber() 
     {
         return this.number;

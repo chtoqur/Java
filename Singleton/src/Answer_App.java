@@ -9,15 +9,19 @@ public class Answer_App {
     public static final int DEPOSIT_ACCOUNT = 4;
     public static final int WITHDRAW_ACCOUNT= 5;
 
-
-    public static boolean createAccount(BankApplication bank, String number, String name, int balance)
+    public static boolean createAccount(Answer_BankApplication bankApp, String number, String name, int balance)
     {
-        Account acc = new Account(number, name, balance);
-
-        return bank.createAccount(acc);
-
-        
+        // 파라메터로 받은 매개값으로 객체를 찍어내고
+        Answer_Account acc = new Answer_Account(number, name, balance);
+        // createAccount를 이용, 객체 배열의 가장 가까운 null 속에
+        // 해당 객체의 참조값을 집어넣는다
+        return bankApp.createAccount(acc);
     }
+
+
+
+
+
 
 
     public static void main(String[] args) throws Exception {
@@ -25,12 +29,10 @@ public class Answer_App {
         String temp;
         int userInput;
         
-        BankApplication bankApp = new BankApplication(100);
+        Answer_BankApplication bankApp = new Answer_BankApplication(100);
         String number = "";
         String name = "";
         int balance = 0;
-                
-
 
         do {
             System.out.println("-------------------------------------------------------------------");
@@ -82,7 +84,6 @@ public class Answer_App {
                     System.out.println("결과 : 삭제가 실패하였습니다.");
                 }
 
-
                 break;
 
                 case INQUIRY_ACCOUNT :
@@ -91,19 +92,24 @@ public class Answer_App {
                 System.out.println("계좌목록");
                 System.out.println("---------------------------");
                 int maxCount = bankApp.getMax();
-                Account ac = null;
+                Answer_Account ac = null;
 
                 for (int i = 0; i < maxCount; i++)
-                {                    
+                {
+                    // bankApp = 사용자 입력값(100개)의 참조변수가 들어갈 수 있는
+                    // Account 객체 배열 포함한 클래스 
+
+                    // 원래는
+                    // Answer_Account acc = new Answer_Account(number, name, balance);
+                    // bankApp.createAccount(acc);
+                    // this.account[pos] = acc;
                     ac = bankApp.getAccount(i);
+                    
                     if (ac != null)
                     {
                         System.out.printf("%s\t %s\t %d\n", ac.getNumber(), ac.getName(), ac.getBalance());
                     }
-                    
-
                 }
-
                 
                 break;
 
@@ -163,14 +169,10 @@ public class Answer_App {
                 break;
 
             }
-
-
         
         }while(userInput != 6);
 
         System.out.println("Bye");
-
-
         
     }
 }

@@ -80,4 +80,8 @@ public class Account {
         return name;
     }
 
+    public Object getNumber() {
+        return null;
+    }
+
 }

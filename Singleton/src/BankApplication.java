@@ -23,6 +23,14 @@ public class BankApplication {
         count = 0;
         Max = num;
 
+        ////////////////////////////////////////////////////
+        //test-code
+        account[0] = new Account("111-111", "abc", 10000);
+        account[1] = new Account("222-222", "def", 20000);
+        account[2] = new Account("333-333", "efg", 30000);
+        account[3] = new Account("444-444", "oqp", 40000);
+        count = 4;
+        ///////////////////////////////////////////////////
     }
 
     // 계좌생성
