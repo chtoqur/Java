@@ -1,138 +1,187 @@
-import java.util.Scanner;
-
 public class BankApplication {
-    public static void main(String[] args) {
+    // BankApplication의 역할은 Account, 즉 계좌 관리를 하는 것
     
-        Account[] account = new Account[100];
+    private int count;         // Account 객체개수
+    private int Max;           // Account의 최대치
+    private Account[] account;  // Account 배열 account
 
-        Scanner scan = new Scanner(System.in);
-        Scanner scan2 = new Scanner(System.in);
-        String userInput = null;
-        String userInput2 = null;
-        int userInput2num = 0;
-
-        int select = 0;
-        int deposit = 0;
-        int endNum = -1;
-        int totalAccountNum = 0;
-
-        do
-        {
-            System.out.println("----------------------------------------------------");
-            System.out.println("1.계좌생성 | 2.계좌목록 | 3.예금 | 4.출금 | 5. 종료");
-            System.out.println("----------------------------------------------------");
-            System.out.printf("선택> ");
-            userInput = scan.nextLine();
-            select = Integer.parseInt(userInput);
-
-            switch (select) {
-
-                case 1:
-
-                    System.out.println("---------");
-                    System.out.println("계좌생성");
-                    System.out.println("---------");
-
-                    account[totalAccountNum] = new Account();
-
-                    System.out.printf("계좌번호: ");
-                    userInput = scan.nextLine();
-                    account[totalAccountNum].setAccountNum(userInput);
-
-                    System.out.printf("계좌주: ");
-                    userInput = scan.nextLine();
-                    account[totalAccountNum].setName(userInput);
-
-                    System.out.printf("초기입금액: ");
-                    userInput = scan.nextLine();
-                    deposit = Integer.parseInt(userInput);
-
-                    if (deposit >= 0 && deposit <= 1000000)
-                    {
-                        account[totalAccountNum].setBalance(deposit);
-                        totalAccountNum++;
-                        System.out.println("결과: 계좌가 생성되었습니다.");
-                    }
-                    else
-                    {
-                        System.out.println("결과: 잘못된 정보입니다. 계좌 생성에 실패하였습니다.");
-                    }                 
-
-                    break;
-
-                case 2:
-
-                    System.out.println("---------");
-                    System.out.println("계좌목록");
-                    System.out.println("---------");
-                    
-                    for(int i = 0; i < totalAccountNum; i++)
-                    {
-                        System.out.printf("%s\t%s\t%d\n",
-                        account[i].getAccountNum(), account[i].getName(), account[i].getBalance());
-                    }
-                    
-                    break;
-                
-                case 3:
-
-                    System.out.println("---------");
-                    System.out.println("예금");
-                    System.out.println("---------");
-
-                    System.out.printf("계좌번호: ");
-                    userInput = scan.nextLine();
-
-                    System.out.printf("입금액: ");
-                    userInput2 = scan2.nextLine();
-                    userInput2num = Integer.parseInt(userInput2);
-
-                    for(int i = 0; i < totalAccountNum; i++)
-                    {
-                        if (userInput.equals(account[i].getAccountNum()))
-                        {
-                            account[i].deposit(userInput2num);
-                        }
-                    }
-
-                    break;
-                
-                case 4:
-
-                    System.out.println("---------");
-                    System.out.println("출금");
-                    System.out.println("---------");
-
-                    System.out.printf("계좌번호: ");
-                    userInput = scan.nextLine();
-
-                    System.out.printf("출금액: ");
-                    userInput2 = scan2.nextLine();
-                    userInput2num = Integer.parseInt(userInput2);
-
-                    for(int i = 0; i < totalAccountNum; i++)
-                    {
-                        if (userInput.equals(account[i].getAccountNum()))
-                        {
-                            account[i].withdraw(userInput2num);
-                        }
-                    }
-
-                    System.out.println("출금이 성공되었습니다.");
-
-                    break;
-
-                case 5:
-                    System.out.println("프로그램 종료");
-                    endNum = 0;
-                    break;
-                
-            
-                default:
-                    break;
-            }
-        }
-        while(endNum == -1);
+    // 생성자
+    public BankApplication()
+    {
+        count = 0;
+        Max = 0;
+        // 0개로 생성
+        account = null;
     }
 
+    // 오버로딩 생성자
+    // 매개값에 최대 account 갯수
+    public BankApplication(int num)
+    {
+        // num 개수 만큼의 배열 = acount
+        account = new Account[num];
+        count = 0;
+        Max = num;
+
+    }
+
+    // 계좌생성
+    public boolean createAccount(Account account)
+    {
+        // 빈 위치
+        int pos = this.getEmptySlot();
+
+        // account가 없거나 pos가 증가하다가 최대치에 도달하면 false
+        // pos는 0부터 시작이므로 Max - 1로 비교
+        if ((account == null) || (pos == -1))
+        {
+            return false;
+        }
+
+        this.account[pos] = account;
+        count++;
+        return true;
+
+    }
+
+    // accouont 배열에서 처음으로 만나는 null 위치를 리턴
+    public int getEmptySlot()
+    {
+        for (int i = 0; i < Max; i++)
+        {
+            if (account[i] == null)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static boolean createAccount(BankApplication bank, String number, String name, int balance)
+    {
+        Account acc = new Account(number, name, balance);
+        
+        return bank.createAccount(acc);
+    }
+
+    public int getCount()
+    {
+        return count;
+    }
+
+    public Account getAccount(int index)
+    {
+        // 현재 
+        // 왜 -1 ??
+        if (index > count)
+            return null;
+
+        if (account[index] != null)
+        {
+            return new Account(account[index].getAccountNum(),
+                                account[index].getName(),
+                                account[index].getBalance());
+        }
+        
+        else
+        {
+            return null;
+        }
+    }
+
+    // 예금처리
+    public boolean deposit(String number, int balance)
+    {
+        int index;
+        // 현재잔액
+        int curBalance;
+        
+        index = findAccountIndex (number);
+
+        if (index == -1)
+            return false;
+
+        curBalance = account[index].getBalance();
+        account[index].setBalance(curBalance + balance);
+        return true;
+    }
+
+    private int findAccountIndex (String number)
+    {
+        for (int i = 0; i < Max; i++)
+        {
+            if (account[i] != null)
+            {
+                if (true == (account[i].getAccountNum().equals(number)))
+                {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    // 출금처리
+    public boolean withdraw (String number, int balance)
+    {
+        int index;
+        // 현재잔액
+        int curBalance;
+        
+        index = findAccountIndex(number);
+
+        if (index == -1)
+            return false;
+
+        curBalance = account[index].getBalance();
+
+        if(curBalance < balance)
+        {
+            return false;
+        }
+
+        account[index].setBalance(curBalance - balance);
+        return true;
+    }
+
+    public boolean delete (String number)
+    {
+
+        int targetIndex = -1;
+        targetIndex = findAccountIndex(number);
+
+        if (targetIndex == -1)
+        {
+            return false;
+        }
+
+        account[targetIndex] = null;
+        count--;
+        
+        return true;
+    }
+
+    public int maxAccountNum()
+    {
+        int max = 0;
+
+        for (int i = 0; i < account.length; i++)
+        {
+            if(account[i] != null)
+            {
+                if(i > max)
+                {
+                    max = i;
+                }
+            }
+        }
+
+        return max;
+
+    }
+
+    public int getMax()
+    {
+        return this.Max;
+    }
 }
