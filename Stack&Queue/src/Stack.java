@@ -1,11 +1,11 @@
 public class Stack {
     
     public static final int ERROR_STACK = Integer.MIN_VALUE;
-    // 스택포인터 - push & pop 위치정보
-    private int sp;
-    private int[] ar;
-    private int size;
+    private int sp;     // 스택포인터 - push & pop 위치정보
+    private int[] ar;   // 데이터가 보관될 배열
+    private int size;   // 배열의 크기
 
+    // 기본 생성자
     public Stack()
     {
         sp = 0;
@@ -13,6 +13,7 @@ public class Stack {
         size = 0;
     }
 
+    // 오버로딩 생성자
     public Stack(int size)
     {
         sp = 0;
@@ -28,11 +29,14 @@ public class Stack {
         this.size = size;
         // 크기만큼 데이터 잡아줌
         ar = new int[size];
+
         return true;
     }
 
     public boolean isOverFlow()
     {
+        // sp는 0부터 카운팅, size는 1부터
+        // sp와 size가 같은 값이라면 오버플로우
         if(sp == size)
         {
             return true;
@@ -73,17 +77,15 @@ public class Stack {
     {
         if (isUnderFlow())
         {
-            // 리턴값 정할 때 조심해야함
+            // int 타입 리턴값 정할 때 주의
             // 진짜 사용자가 넣은 값을 리턴값이라고 착각할수도 있음
 
-            // Integer가 가질 수 있는 최소값
+            // Integer가 가질 수 있는 최소값 Integer.MIN_VALUE;
             return ERROR_STACK;
         }
 
         sp--;
-        return ar[sp];
-
+        return ar[sp] = 0;
     }
-
 
 }

@@ -20,18 +20,6 @@ public class StackApp {
             System.out.println("[ERROR]STACK ERROR");
         }
         
-        // int[] data = new int [7];
 
-        // int rear = 0;
-
-        // while (true)
-        // {
-        //     // 반복 공식
-        //     // (n + 1) % max
-        //     // % 연산은 반복이다!
-        //     rear = (rear + 1) % 7;
-
-        //     System.out.println(rear);
-        // }
     }
 }
