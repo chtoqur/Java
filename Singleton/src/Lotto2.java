@@ -1,52 +1,66 @@
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Lotto2 {
-    
-    public static void main(String[] args) {
 
-        Scanner scan = new Scanner(System.in);
-        String userInput = null;
-        int userInputNum = 0;
-        int[][] lotto;
-        
-        int lottoNum = 0;
+    private static final int MAX = 6;
+    private static Lotto2 lotto = null;
 
-        System.out.println("-----------------------------------");
-        System.out.printf("로또를 몇 개 구매하시겠습니까? >");
-        userInput = scan.nextLine();
-        userInputNum = Integer.parseInt(userInput);
-        lotto = new int[userInputNum][6];
+    private Lotto2()
+    {}
 
-        for (int i = 0; i < lotto.length; i++)
+    // 외부 접근을 위한 정적 메소드 선언
+    public static Lotto2 getInstance()
+    {
+        if (lotto == null)
         {
-            for (int j = 0; j < 6; j++)
-            {
-                // 랜덤 숫자 추출
-                lottoNum = ((int)(Math.random() * 45)) + 1;
-                // 배열에 삽입
-                lotto[i][j] = lottoNum;
+            lotto = new Lotto2();
+        }
+        return lotto;
+    }
 
-                // 중복 숫자 제거 로직
-                // k < j : 현재 j에 들어가있는 숫자의 갯수만큼 순회하며 검사
-                for (int k = 0; k < j; k++)
-                {
-                    // 만약 추출한 숫자가 현재 배열에 존재하는 수와 중복되는 것이라면
-                    if (lottoNum == lotto[i][k])
-                    {
-                        // j의 수를 하나 줄임으로서 숫자 추출 로직을 한 번 더 반복한다.
-                        j--;
-                    }
-                }
+    private int getRandomNumber()
+    {
+        double rn = Math.random();
+        return ((int)(rn * 45)) + 1;
+    }
+
+    private boolean isExistNumber(int[] ar, int num)
+    {
+        for (int i = 0; i < ar.length; i++)
+        {
+            if (ar[i] == num)
+            {
+                return true;
             }
-            // 오름차순 정렬
-            Arrays.sort(lotto[i]);
-            // 출력
-            System.out.println(Arrays.toString(lotto[i]));
         }
 
-        System.out.printf("%d개 구매 완료. 프로그램을 종료합니다.\n", userInputNum);
-        System.out.println("-----------------------------------");
-        
+        return false;
     }
+
+    public int[] getLottoNum()
+    {
+        int[] numbers = new int[MAX];
+        int pos = 0;
+        int randomNumber;
+
+        while(pos < MAX)
+        {
+            // 1. 랜덤값을 가지고 온다. (1~45)
+            randomNumber = getRandomNumber();
+
+            // 2. 랜덤값이 배열에 존재 하는지?
+            if (false == isExistNumber(numbers, randomNumber))
+            {
+                // 3. 존재하지 않는다면 추가하고 pos 증가
+                numbers[pos] = randomNumber;
+                pos++;
+            };
+
+        }
+
+        Arrays.sort(numbers);
+
+        return numbers;
+    }
+
 }
