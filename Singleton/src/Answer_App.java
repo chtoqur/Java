@@ -18,12 +18,6 @@ public class Answer_App {
         return bankApp.createAccount(acc);
     }
 
-
-
-
-
-
-
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
         String temp;
@@ -104,7 +98,7 @@ public class Answer_App {
                     // bankApp.createAccount(acc);
                     // this.account[pos] = acc;
                     ac = bankApp.getAccount(i);
-                    
+
                     if (ac != null)
                     {
                         System.out.printf("%s\t %s\t %d\n", ac.getNumber(), ac.getName(), ac.getBalance());
