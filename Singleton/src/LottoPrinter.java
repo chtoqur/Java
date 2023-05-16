@@ -1,29 +1,27 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Lotto3 {
-    
+public class LottoPrinter {
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
         String userInput = null;
         int userInputNum = 0;
-        int lottoNum = 0;
         
         System.out.println("-----------------------------------");
         System.out.printf("로또를 몇 개 구매하시겠습니까? >");
         userInput = scan.nextLine();
         userInputNum = Integer.parseInt(userInput);
+
+        // 싱글톤
+        Lotto lotto = Lotto.getInstance();
         
-        Lotto lotto = new Lotto();
         int[][] myLotto = new int[userInputNum][6];
         lotto.setLotto(myLotto);
-        lotto.randomLotto(myLotto);
+        lotto.getLottoNum(myLotto);
 
         for (int i = 0; i < myLotto.length; i++)
         {
-            // 오름차순 정렬
-            Arrays.sort(myLotto[i]);
             // 출력
             System.out.println(Arrays.toString(myLotto[i]));
         }
