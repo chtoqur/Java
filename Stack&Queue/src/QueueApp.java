@@ -1,21 +1,41 @@
+import java.util.concurrent.Flow.Subscription;
+
 public class QueueApp {
     public static void main(String[] args) {
         
-    Queue2 myQueue = new Queue2(3);
+    Queue2 myQueue = new Queue2(4);
     boolean res;
 
     int data;
 
-    res = myQueue.push(10);
-    res = myQueue.push(20);
-    res = myQueue.push(30); // isFull true뜨는 이유 검사해야함
-    res = myQueue.push(40);
+    res = myQueue.enqueue(10);
+    res = myQueue.enqueue(20);
+    res = myQueue.enqueue(30);
+    res = myQueue.enqueue(40);
 
-    data = myQueue.pop(); // 30
-    data = myQueue.pop(); // 20
-    data = myQueue.pop(); // 10
-    data = myQueue.pop(); // 언더플로우
-    System.out.println(data); // 정수의 최소값
-        
+    // // 오버플로우
+    // res = myQueue.enqueue(50);     // 큐가 가득차있습니다.
+    
+    data = myQueue.dequeue();   
+    // // // System.out.println(data);      // 10
+    res = myQueue.enqueue(60);     // push 성공
+
+    data = myQueue.dequeue();
+    // // // System.out.println(data);       // 20
+    data = myQueue.dequeue();
+    // res = myQueue.enqueue(100);
+
+    // System.out.println(data);       // 30
+    data = myQueue.dequeue();                   // ERROR!!!!!!!!!!!!!!!!!!!
+    // System.out.println(data);       // 40
+    // data = myQueue.dequeue();
+    // System.out.println(data);       // 60
+
+    // 언더플로우
+    // data = myQueue.dequeue();       // pop 실패
+
+    // System.out.println(myQueue.getCount());
+    myQueue.printAll();
+    // myQueue.printQueue();
     }
 }

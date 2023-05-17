@@ -85,7 +85,24 @@ public class Stack {
         }
 
         sp--;
-        return ar[sp] = 0;
+        return ar[sp];
+    }
+
+    public void printAll()
+    {
+        if (isUnderFlow() == true)
+        {
+            System.out.println("빈 배열입니다.");
+        }
+
+        int count = sp;
+        int index = sp - 1;
+
+        for (int i = 0; i < count; i++)
+        {
+            System.out.println(ar[index]);
+            index--;
+        }
     }
 
 }
