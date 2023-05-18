@@ -1,3 +1,5 @@
+package Patient;
+
 public class Patient {
     // 이름, 성별, 몸무게, 혈액형
 

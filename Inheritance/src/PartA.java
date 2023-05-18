@@ -1,3 +1,5 @@
+import Patient.Patient;
+
 public class PartA extends Patient {
     // 안과
 

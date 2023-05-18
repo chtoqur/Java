@@ -1,3 +1,5 @@
+import Patient.Patient;
+
 public class PartS extends Patient {
     // 산부인과
 
