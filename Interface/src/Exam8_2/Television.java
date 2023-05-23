@@ -1,9 +1,5 @@
 package Exam8_2;
 
-import java.rmi.Remote;
-
-import javax.lang.model.util.ElementScanner14;
-
 public class Television implements RemoteControl {
 
     private int volume;
