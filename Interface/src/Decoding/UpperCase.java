@@ -11,18 +11,28 @@ public class UpperCase implements CodeInterface {
     {
         // String을 char[]로 변환
         code = text.toCharArray();
-        intCode = new int[code.length];
 
         for(int i = 0; i < code.length; i++)
         {
-            if (intCode[i] == 65)
+            // 알파벳인 경우만 복호화, 공백 제외
+            if(Character.isAlphabetic(code[i]))
             {
-                intCode[i] = 90;
+                // (예외) A인 경우 Z로 변환
+                if (code[i] == 'A')
+                {
+                    code[i] = 'Z';
+                }
+                code[i]--;
             }
-
-            intCode[i] = (int)code[i] - 1;
         }
+        return true;
+    }
 
+    public boolean print()
+    {
+        String decodedText;
+        decodedText = new String(code);
+        System.out.println(decodedText);
         return true;
     }
 }

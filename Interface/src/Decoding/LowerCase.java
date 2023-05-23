@@ -11,24 +11,28 @@ public class LowerCase implements CodeInterface {
     {
         // String을 char[]로 변환
         code = text.toCharArray();
-        intCode = new int[code.length];
 
         for(int i = 0; i < code.length; i++)
         {
-            if (intCode[i] == 97)
+            // 알파벳인 경우만 복호화, 공백 제외
+            if(Character.isAlphabetic(code[i]))
             {
-                intCode[i] = 122;
+                // (예외) a인 경우 a로 변환
+                if (code[i] == 'a')
+                {
+                    code[i] = 'z';
+                }
+                code[i]--;
             }
-
-            intCode[i] = (int)code[i] - 1;
         }
+        return true;
+    }
 
-        for (int i = 0; i < intCode.length; i++)
-        {
-            code[i] = (char)intCode[i];
-        }
-
-        System.out.println(String.valueOf(code));
+    public boolean print()
+    {
+        String decodedText;
+        decodedText = new String(code);
+        System.out.println(decodedText);
         return true;
     }
 }

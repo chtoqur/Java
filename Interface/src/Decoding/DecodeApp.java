@@ -19,10 +19,18 @@ public class DecodeApp {
             System.out.printf("복호화 할 암호데이터를 입력하세요 > ");
             userInputCode = scan.nextLine();
             program.decode(userInputCode);
+
+            program.print();
         }
         else if (userInputNum == 2)
         {
             // 소문자
+            CodeInterface program = new LowerCase();
+            System.out.printf("복호화 할 암호데이터를 입력하세요 > ");
+            userInputCode = scan.nextLine();
+            program.decode(userInputCode);
+            
+            program.print();
         }
         else
         {
