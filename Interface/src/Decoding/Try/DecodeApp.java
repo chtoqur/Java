@@ -65,7 +65,7 @@ public class DecodeApp {
 
         else if (userInputNum == MIX_CASE)
         {
-            // 소문자 - J BN b cpza
+            // 대소문자 - J BN b cpza
             Decryptable program = new decryptMixedCase();
             System.out.printf("복호화 할 암호데이터를 입력하세요 > ");
             userInputCode = scan.nextLine();
@@ -74,7 +74,7 @@ public class DecodeApp {
             if (result == true)
             {
                 decryptMixedCase mixCase = null;
-                mixCase = (decryptMixedCase)program;
+                  = (decryptMixedCase)program;
                 mixCase.print();
             }
             else if (result == false)
