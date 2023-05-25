@@ -1,4 +1,4 @@
-package Answer;
+package Decoding.Answer;
 
 public class App {
     public static void main(String[] args) throws Exception {

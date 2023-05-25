@@ -1,4 +1,4 @@
-package Answer;
+package Decoding.Answer;
 
 public class MappingTable {
     public static final int ALPHA = 26;

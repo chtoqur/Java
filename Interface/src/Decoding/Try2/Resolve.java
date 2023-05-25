@@ -1,4 +1,4 @@
-package Decoding.MappingTable2;
+package Decoding.Try2;
 
 import Decoding.Try.decryptLowerCase;
 

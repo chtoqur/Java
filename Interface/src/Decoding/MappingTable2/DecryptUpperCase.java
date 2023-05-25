@@ -2,8 +2,11 @@ package Decoding.MappingTable2;
 
 public class DecryptUpperCase implements Decryptable {
 
-    // 정적 필드는 인스턴스 멤버 클래스(MappingTable) 내부에 사용하지 말 것
+    // 인스턴스 멤버 클래스(MappingTable)의 정적 필드
     public static final int ALPHA = 26;
+
+    public static final int DECRYPT_BY_MAPPING = 1;
+    public static final int DECRYPT_BY_ASCII = 2;
 
     // 대문자 매핑테이블
     public class UpperMappingTable {
@@ -57,17 +60,44 @@ public class DecryptUpperCase implements Decryptable {
         }
     }   // MappingTable Class end
 
-    // 필드
+    // 필드 영역
     UpperMappingTable mtable;
+    String decData;
 
     // 기본 생성자
     public DecryptUpperCase()
     {
         mtable = new UpperMappingTable();
+        decData = "";
+    }
+
+    // Getter
+    public String getDecData()
+    {
+        return this.decData;
     }
 
     // 메소드 영역
     @Override
+    public String decrypt(int select, String encData)
+    {
+        if (select == DECRYPT_BY_MAPPING)
+        {
+            decData = decryptByTable(encData);
+            return getDecData();
+        }
+        else if(select == DECRYPT_BY_ASCII)
+        {
+            decData = decryptByASCII(encData);
+            return getDecData();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    // 매핑테이블
     public String decryptByTable(String encData)
     {
         char encChar = 0;        
@@ -80,11 +110,10 @@ public class DecryptUpperCase implements Decryptable {
             //매핑테이블에서 찾는다.
             decData += mtable.decoding(encChar);
         }
-
         return decData;
     }
 
-    @Override
+    // 아스키코드
     public String decryptByASCII(String encData)
     {
         char encChar = 0;
