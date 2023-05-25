@@ -88,7 +88,6 @@ public class DecryptApp {
                 System.out.println("잘못된 입력입니다. 알파벳과 공백으로 이루어진 암호를 입력하세요.");
             }
         }
-
         else
         {
             System.out.println("잘못된 입력입니다. 1과 2중에 입력하세요.");
