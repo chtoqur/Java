@@ -6,13 +6,13 @@ public class DecryptUpperCase implements Decryptable {
     public static final int ALPHA = 26;
 
     // 대문자 매핑테이블
-    public class MappingTable {
+    public class UpperMappingTable {
 
         private char[] encode;
         private char[] decode;
     
         // 기본 생성자
-        public MappingTable()
+        public UpperMappingTable()
         {
             char c = 'A';
             encode = new char[ALPHA];
@@ -58,12 +58,12 @@ public class DecryptUpperCase implements Decryptable {
     }   // MappingTable Class end
 
     // 필드
-    MappingTable mtable;
+    UpperMappingTable mtable;
 
     // 기본 생성자
     public DecryptUpperCase()
     {
-        mtable = new MappingTable();
+        mtable = new UpperMappingTable();
     }
 
     // 메소드 영역

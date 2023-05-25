@@ -4,7 +4,7 @@ package Decoding.Try;
 public class decryptLowerCase implements Decryptable {
     
     private char[] code;
-    String decodedText;
+    private String decodedText;
 
     public decryptLowerCase()
     {

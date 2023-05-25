@@ -1,6 +1,6 @@
 package Decoding.MappingTable;
 
-public class AppCode {
+public class DecryptApp {
     
     public static void main(String[] args) {
 
@@ -15,6 +15,7 @@ public class AppCode {
         decodedData = resolve.decryptByTable(upperData);
         decodedData2 = resolve.decryptByTable(lowerData);
         // decodedData = resolve.decryptByASCII(upperData);
+        // decodedData2 = resolve.decryptByASCII(lowerData);
 
         // 결과를 출력한다.
         System.out.println(decodedData);

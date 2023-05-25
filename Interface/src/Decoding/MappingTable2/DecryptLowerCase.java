@@ -1,4 +1,4 @@
-package Decoding.MappingTable;
+package Decoding.MappingTable2;
 
 public class DecryptLowerCase implements Decryptable {
 
@@ -66,8 +66,13 @@ public class DecryptLowerCase implements Decryptable {
         mtable = new LowerMappingTable();
     }
 
+    // @Override
+    public String decrypt(String encData)
+    {
+        return encData;
+    }
+
     // 메소드 영역
-    @Override
     public String decryptByTable(String encData)
     {
         char encChar = 0;        
@@ -84,7 +89,6 @@ public class DecryptLowerCase implements Decryptable {
         return decData;
     }
 
-    @Override
     public String decryptByASCII(String encData)
     {
         char encChar = 0;

@@ -1,20 +1,20 @@
-package Decoding.MappingTable;
+package Decoding.MappingTable2;
 
-public class DecryptLowerCase implements Decryptable {
+public class DecryptUpperCase implements Decryptable {
 
     // 정적 필드는 인스턴스 멤버 클래스(MappingTable) 내부에 사용하지 말 것
     public static final int ALPHA = 26;
-    
-    // 소문자 매핑테이블
-    public class LowerMappingTable {
+
+    // 대문자 매핑테이블
+    public class UpperMappingTable {
 
         private char[] encode;
         private char[] decode;
     
         // 기본 생성자
-        public LowerMappingTable()
+        public UpperMappingTable()
         {
-            char c = 'a';
+            char c = 'A';
             encode = new char[ALPHA];
             decode = new char[ALPHA];
     
@@ -26,8 +26,8 @@ public class DecryptLowerCase implements Decryptable {
             }
     
             // decode 배열 초기화
-            decode[0] = 'z';
-            c = 'a';
+            decode[0] = 'Z';
+            c = 'A';
             for (int i = 1; i < decode.length; i++) 
             {
                 decode[i] = c;
@@ -57,13 +57,13 @@ public class DecryptLowerCase implements Decryptable {
         }
     }   // MappingTable Class end
 
-    // 필드 영역
-    LowerMappingTable mtable;
+    // 필드
+    UpperMappingTable mtable;
 
     // 기본 생성자
-    public DecryptLowerCase()
+    public DecryptUpperCase()
     {
-        mtable = new LowerMappingTable();
+        mtable = new UpperMappingTable();
     }
 
     // 메소드 영역
@@ -94,9 +94,9 @@ public class DecryptLowerCase implements Decryptable {
         {
             encChar = encData.charAt(i);
 
-            if (encChar == 'a')
+            if (encChar == 'A')
             {
-                decData += 'z';
+                decData += 'Z';
             }
             else if (encChar == ' ')
             {
