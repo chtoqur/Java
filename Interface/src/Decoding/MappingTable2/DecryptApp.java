@@ -27,12 +27,12 @@ public class DecryptApp {
             // 대문자 - J BN B CPZA
             System.out.printf("복호화 할 암호데이터를 입력하세요 > ");
             userInputCode = scan.nextLine();
-            result = DistinguishCase.isAlphabetString(userInputCode);
+            result = CheckEncData.isAlphabetString(userInputCode);
 
             if (result == true)
             {
                 // 대소문자 식별
-                result = DistinguishCase.isUpperCase(userInputCode);
+                result = CheckEncData.isUpperCase(userInputCode);
 
                 // 대문자-매핑테이블
                 if (result == true)
@@ -61,12 +61,12 @@ public class DecryptApp {
             // 소문자 - j bn b cpza
             System.out.printf("복호화 할 암호데이터를 입력하세요 > ");
             userInputCode = scan.nextLine();
-            result = DistinguishCase.isAlphabetString(userInputCode);
+            result = CheckEncData.isAlphabetString(userInputCode);
 
             if (result == true)
             {
                 // 대소문자 식별
-                result = DistinguishCase.isUpperCase(userInputCode);
+                result = CheckEncData.isUpperCase(userInputCode);
 
                 // 대문자-아스키코드
                 if (result == true)

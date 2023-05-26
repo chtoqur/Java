@@ -1,8 +1,8 @@
 package Decoding.MappingTable2;
 
-public class DistinguishCase {
+public class CheckEncData {
 
-    public DistinguishCase()
+    public CheckEncData()
     {}
     
     // 올바른 알파벳 문자열인지 확인

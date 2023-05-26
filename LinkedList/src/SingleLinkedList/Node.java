@@ -1,7 +1,7 @@
+package SingleLinkedList;
 public class Node {
 
     // 저장소
-    
     public int value;     // 내부 속성
     public Node next;     // 다음 노드 주소
 

@@ -1,4 +1,5 @@
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,30 +9,18 @@ public class ExceptionApp5 {
         
         // 주소 저장
         Path file = Paths.get("C:\\AAA\\test.txt");
-        BufferedWriter writer = null;
 
-        try
+        try (BufferedWriter writer = Files.newBufferedWriter(file))
         {
-            // 뭔가를 저장할 버퍼를 만드는 것
-            // 용도 = file에 저장할 버퍼
-            // 파일을 만들어서 열어라
-            writer = Files.newBufferedWriter(file);
-
-            // 파일에 써라
+            // 파일에 작성
             writer.write('A');
             writer.write('B');
-
-            // 다 적었으면
-            if (writer != null)
-            {
-                // 파일을 닫아라
-                writer.close();
-            }
         }
         catch(IOException e)
         {
-
+            // printStackTrace = 역으로 올라가며 출력
+            e.printStackTrace();
         }
-
+        
     }
 }
