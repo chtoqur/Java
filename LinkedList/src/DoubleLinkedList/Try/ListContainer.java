@@ -1,7 +1,5 @@
 package DoubleLinkedList.Try;
 
-import javax.lang.model.util.ElementScanner14;
-
 public class ListContainer {
 
     private Node header;
@@ -36,8 +34,16 @@ public class ListContainer {
     // return : 추가한 위치 인덱스, 추가가 실패한 경우 -1
     public int insertNode(Node newNode, int pos)
     {
+        boolean result;
+        result = isExistKey(newNode);
+        // 이미 존재하는 key인 경우 추가 실패
+        if (result == true)
+        {
+            return -1;
+        }
+
         // 맨 앞 추가, 최초 노드 생성
-        if (nodeCount == 0)
+        else if (nodeCount == 0)
         {
             // 헤더와 노드 연결
             header = newNode;
@@ -61,8 +67,9 @@ public class ListContainer {
 
             return 0;
         }
-        // 맨 뒤
-        else if (pos == nodeCount)
+        // 1. 맨 뒤 or 2. nodeCount를 초과하는 pos로
+        // 사용자가 잘못 입력한 경우 맨 뒤로 강제설정
+        else if ((pos == nodeCount) || (pos > nodeCount))
         {
             // 마지막 노드의 next
             // 삽입될 노드의 prev
@@ -96,7 +103,7 @@ public class ListContainer {
         // 삭제 성공시 true
         // 삭제 실패시 false
 
-        if (nodeCount == 0)
+        if ((nodeCount == 0) || (pos >= nodeCount))
         {
             return false;
         }
@@ -120,12 +127,8 @@ public class ListContainer {
         }
         else
         {
-            Node target = this.header;
+            Node target = getNode(pos);
 
-            for (int i = 0; i < pos; i++)
-            {
-                target = target.next;
-            }
             target.prev.next = target.next;
             target.next.prev = target.prev;
             nodeCount--;
@@ -157,7 +160,6 @@ public class ListContainer {
     public boolean deleteNodeByValue(String value, boolean bLike)
     {
         Node target = this.header;
-        int targetPos = 0;
 
         if (bLike == false)
         {
@@ -165,12 +167,12 @@ public class ListContainer {
             {
                 if (target.getValue().equals(value))
                 {
-                    targetPos = i;
-                    break;
+                    deleteNodeByIndex(i);
+                    i--;
                 }
                 target = target.next;
             }
-            return deleteNodeByIndex(targetPos);
+            return true;
         }
         else if (bLike == true)
         {
@@ -195,9 +197,19 @@ public class ListContainer {
 
         for (int i = 0; i < nodeCount; i++)
         {
-            System.out.printf("position : %d, value : %s\n", i, target.getValue());
+            System.out.printf("position : %d, key : %d, value : %s\n", i, target.getKey(), target.getValue());
             target = target.next;
         }
+    }
+
+    public boolean isExistKey(Node newNode)
+    {
+        for (int i = 0; i < nodeCount; i++)
+        {
+            if (getNode(i).getKey() == newNode.getKey())
+            return true;
+        }
+        return false;
     }
 
     // Getter / Setter
