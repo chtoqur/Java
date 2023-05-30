@@ -1,5 +1,6 @@
-package DoubleLinkedList.Try;
+package DoubleLinkedList.try2;
 
+import DoubleLinkedList.Try.Node;
 import DoubleLinkedList.try2.ListContainer;
 
 public class DoubleLinkedListApp {
@@ -15,7 +16,7 @@ public class DoubleLinkedListApp {
         lc.insertNode(new Node(60, "eee"), 2);
 
         lc.deleteNodeByValue("aaa", false);
-        lc.deleteNodeByValue("e", true);
+        // lc.deleteNodeByValue("e", true);
         lc.printNodeList();
     }
 }
