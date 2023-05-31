@@ -3,10 +3,10 @@ package clone;
 public class RectangleApp {
     public static void main(String[] args) {
         
-        // (equals) 동일한 위치에 동일한 크기로 존재하는 사각형은 생성X
-        
         Rectangle rec1 = new Rectangle(5, 10, 10, 5);
         Rectangle rec2 = new Rectangle(5, 10, 10, 5);
+        int hash1 = rec1.hashCode();
+        int hash2 = rec2.hashCode();
 
         System.out.println(rec1);
         System.out.println(rec2);
@@ -15,25 +15,34 @@ public class RectangleApp {
         {
             System.out.println("동등합니다.");
         }
+        else
+        {
+            System.out.println("동등하지 않습니다.");
+        }
+
+        if (hash1 == hash2)
+        {
+            System.out.println("동일한 인스턴스입니다.");
+        }
+        else
+        {
+            System.out.println("상이한 인스턴스입니다.");
+        }
+
+        Rectangle rec3 = null;
         
+        try
+        {
+            rec3 = (Rectangle)rec1.clone();
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.getStackTrace();
 
+        }
 
-        // Student st1 = new Student("jsh", 1);
-        // st1.setScore(new int[]{80, 90, 100});
-
-        // Student st2 = null;
-        // try
-        // {
-        //     st2 = (Student)st1.clone();
-        // }
-        // catch (CloneNotSupportedException e)
-        // {
-        //     e.printStackTrace();
-        // } 
-
-        // System.out.println(st1);    // 80 90 100
-        // st1.setScore(20, 20, 20);
-        // System.out.println(st2);    // 20 20 20
-        // System.out.println(st1);
+        System.out.println(rec3.getCircum());
+        System.out.println(rec3.getSize());
+        System.out.println(rec3.toString());
     }
 }

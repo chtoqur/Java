@@ -24,18 +24,24 @@ public class Rectangle implements Cloneable {
     {
         leftTop = new Point();
         rightBottom = new Point();
+        width = 0;
+        height = 0;
     }
 
     public Rectangle(Point leftTop, Point rightBottom)
     {
         this.leftTop = leftTop;
         this.rightBottom = rightBottom;
+        setWidth(leftTop.getXPos(), rightBottom.getXPos());
+        setHeight(leftTop.getYPos(), rightBottom.getYPos());
     }
 
-    public Rectangle(int a, int b, int c, int d)
+    public Rectangle(int left, int top, int right, int bottom)
     {
-        leftTop = new Point(a, b);
-        rightBottom = new Point(c, d);
+        leftTop = new Point(left, top);
+        rightBottom = new Point(right, bottom);
+        setWidth(left, right);
+        setHeight(top, bottom);
     }
 
     // 2. Getter / Setter
@@ -43,21 +49,28 @@ public class Rectangle implements Cloneable {
         return this.width;
     }
 
+    // 가로
     public void setWidth(int left, int right) {
 
-        if (left > right)
+        // 1. left&right 음수
+        if ((left < 0) && (right <= 0))
         {
-            this.width = left - right;
+            this.width = -(left-right);
         }
-        else if (right > left)
+        // 2. left&right 양수
+        else if ((left >= 0) && (right > 0))
         {
             this.width = right - left;
         }
-        else if (left == right)
+        // 3. left-음수 right-양수
+        else if ((left < 0) && (right > 0))
         {
-            this.width = -1;
+            this.width = -(left) + right;
         }
-
+        else
+        {
+            this.width = ERROR_NUM;
+        }
     }
 
     public int getHeight() {
@@ -66,17 +79,24 @@ public class Rectangle implements Cloneable {
 
     public void setHeight(int top, int bottom) {
 
-        if (top > bottom)
+        // 1. top&bottom 음수
+        if ((top <= 0) && (bottom < 0))
+        {
+            this.height = -(bottom-top);
+        }
+        // 2. top&bottom 양수
+        else if ((top > 0) && (bottom >= 0))
         {
             this.height = top - bottom;
         }
-        else if (bottom > top)
+        // 3. top-양수 bottom-음수
+        else if ((top > 0) && (bottom < 0))
         {
-            this.height = bottom - top;
+            this.height = -(bottom) + top;
         }
-        else if (top == bottom)
+        else
         {
-            this.height = -1;
+            this.height = ERROR_NUM;
         }
     }
 
@@ -100,21 +120,44 @@ public class Rectangle implements Cloneable {
     @Override
     public boolean equals(Object obj)
     {
-        Rectangle target = (Rectangle)obj;
+        if (obj instanceof Rectangle)
+        {
+            Rectangle target = (Rectangle)obj;
 
-        if ((target.leftTop.getXPos() != this.leftTop.getXPos()))
-            return false;
+            if ((target.leftTop.getXPos() != this.leftTop.getXPos()))
+                return false;
+    
+            if ((target.leftTop.getYPos() != this.leftTop.getYPos()))
+                return false;
+    
+            if ((target.rightBottom.getXPos() != this.rightBottom.getXPos()))
+                return false;
+            
+            if ((target.rightBottom.getYPos() != this.rightBottom.getYPos()))
+                return false;
 
-        if ((target.leftTop.getYPos() != this.leftTop.getYPos()))
-            return false;
+            return true;
+        }
+        return false;
+    }
 
-        if ((target.rightBottom.getXPos() != this.rightBottom.getXPos()))
-            return false;
-        
-        if ((target.rightBottom.getYPos() != this.rightBottom.getYPos()))
-            return false;
-        
-        return true;
+    // 4. hashcode()
+    @Override
+    public int hashCode()
+    {
+        int hashCode = super.hashCode();
+        return hashCode;
+    }
+
+    // 5. @Override toString()
+    @Override
+    public String toString() {
+        return "{" +
+            " leftTop='" + getLeftTop() + "'" +
+            ", rightBottom='" + getRightBottom() + "'" +
+            ", width='" + getWidth() + "'" +
+            ", height='" + getHeight() + "'" +
+            "}";
     }
 
     // 6. (옵션) Clone()
@@ -131,6 +174,7 @@ public class Rectangle implements Cloneable {
         return newObject;
     }
 
+    // 7. 추가 메소드
     public double getSize()
     {
         return getHeight() * getWidth();
