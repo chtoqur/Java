@@ -28,20 +28,30 @@ public class Rectangle implements Cloneable {
         height = 0;
     }
 
-    public Rectangle(Point leftTop, Point rightBottom)
+    public Rectangle(Point leftTop, Point rightBottom) throws WrongPointException
     {
         this.leftTop = leftTop;
         this.rightBottom = rightBottom;
         setWidth(leftTop.getXPos(), rightBottom.getXPos());
         setHeight(leftTop.getYPos(), rightBottom.getYPos());
+        
+        if ((this.getWidth() <= 0) || (this.getHeight() <= 0))
+        {
+            throw new WrongPointException();
+        }
     }
 
-    public Rectangle(int left, int top, int right, int bottom)
+    public Rectangle(int left, int top, int right, int bottom) throws WrongPointException
     {
-        leftTop = new Point(left, top);
-        rightBottom = new Point(right, bottom);
-        setWidth(left, right);
-        setHeight(top, bottom);
+        this.leftTop = new Point(left, top);
+        this.rightBottom = new Point(right, bottom);
+        setWidth(leftTop.getXPos(), rightBottom.getXPos());
+        setHeight(leftTop.getYPos(), rightBottom.getYPos());
+            
+        if ((this.getWidth() <= 0) || (this.getHeight() <= 0))
+        {
+            throw new WrongPointException();
+        }
     }
 
     // 2. Getter / Setter
@@ -50,6 +60,11 @@ public class Rectangle implements Cloneable {
     }
 
     // 가로
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    // 오버로딩
     public void setWidth(int left, int right) {
 
         // 1. left&right 음수
@@ -71,12 +86,22 @@ public class Rectangle implements Cloneable {
         {
             this.width = ERROR_NUM;
         }
+
+        if (this.width < 0)
+        {
+            this.width = ERROR_NUM;
+        }
     }
 
     public int getHeight() {
         return this.height;
     }
 
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    // 오버로딩
     public void setHeight(int top, int bottom) {
 
         // 1. top&bottom 음수
@@ -108,6 +133,11 @@ public class Rectangle implements Cloneable {
         this.leftTop = leftTop;
     }
 
+    public void setLeftTop(int left, int top) {
+        this.leftTop.setXPos(left);
+        this.leftTop.setYPos(top);
+    }
+
     public String getRightBottom() {
         return "(" + rightBottom.getXPos() + "," + rightBottom.getYPos() + ")";
     }
@@ -115,27 +145,27 @@ public class Rectangle implements Cloneable {
     public void setRightBottom(Point rightBottom) {
         this.rightBottom = rightBottom;
     }
+    
+    public void setRightBottom(int right, int bottom) {
+        this.rightBottom.setXPos(right);
+        this.rightBottom.setYPos(right);
+    }
 
     // 3. @Override equals()
     @Override
     public boolean equals(Object obj)
     {
+        Rectangle target = null;
         if (obj instanceof Rectangle)
         {
-            Rectangle target = (Rectangle)obj;
+            target = (Rectangle)obj;
 
-            if ((target.leftTop.getXPos() != this.leftTop.getXPos()))
+            if (false == this.leftTop.equals(target.leftTop))
                 return false;
     
-            if ((target.leftTop.getYPos() != this.leftTop.getYPos()))
+            if (false == this.rightBottom.equals(target.rightBottom))
                 return false;
     
-            if ((target.rightBottom.getXPos() != this.rightBottom.getXPos()))
-                return false;
-            
-            if ((target.rightBottom.getYPos() != this.rightBottom.getYPos()))
-                return false;
-
             return true;
         }
         return false;
@@ -158,20 +188,29 @@ public class Rectangle implements Cloneable {
             ", width='" + getWidth() + "'" +
             ", height='" + getHeight() + "'" +
             "}";
+
+            // return "{" +
+            // " leftTop='" + getLeftTop().toString() + "'" +
+            // ", rightBottom='" + getRightBottom().toString() + "'" +
+            // ", width='" + getWidth() + "'" +
+            // ", height='" + getHeight() + "'" +
+            // "}";
     }
 
     // 6. (옵션) Clone()
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        Rectangle newObject = (Rectangle)super.clone();
+        Rectangle cloneObject = (Rectangle)super.clone();
 
-        newObject.leftTop = this.leftTop;
-        newObject.rightBottom = this.rightBottom;
-        newObject.width = this.width;
-        newObject.height = this.height;
+        cloneObject.setLeftTop(new Point(leftTop.getXPos(), leftTop.getYPos()));
+        cloneObject.setRightBottom(new Point(rightBottom.getXPos(), rightBottom.getYPos()));
 
-        return newObject;
+        // way2
+        // cloneObject.leftTop = (Point)this.leftTop.clone();
+        // cloneObject.rightBottom = (Point)this.rightBottom.clone();
+
+        return cloneObject;
     }
 
     // 7. 추가 메소드
