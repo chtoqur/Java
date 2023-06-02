@@ -2,7 +2,7 @@ package exam4;
 
 import exam5.Plants;
 
-public class Box3<T extends Number & Plants> {
+public class Box3<T extends Number> {
     
     public T fruit;
 
@@ -32,7 +32,7 @@ public class Box3<T extends Number & Plants> {
 
     public void eatFruit()
     {
-        fruit.eat();
+        // fruit.eat();
     }
 
 }
