@@ -11,7 +11,7 @@ public class LinkedListExample {
         List<String> list1 = new ArrayList<>();
 
         // LinkedList 컬렉션 객체 생성
-        List<String> list2 = new LinkedList<String>();
+        List<String> list2 = new LinkedList<>();
 
         // 시작 시간과 끝 시간을 저장할 변수 선언
         long startTime;

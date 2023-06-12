@@ -1,6 +1,7 @@
 package List.exam15_2;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ArrayListExample {
@@ -33,7 +34,7 @@ public class ArrayListExample {
             Board b = list.get(i);
             System.out.println(b.getSubject() + "\t" + b.getContent() + "\t" + b.getWriter());
         }
-        
+
         // 객체 삭제
         list.remove(2);     // 제목3
         list.remove(2);     // 제목4
