@@ -30,6 +30,7 @@ public class MapExample {
         {
             str = iter.next();
             num = map.get(str);
+            
             if (num > maxScore)
             {
                 maxScore = num;
@@ -37,7 +38,6 @@ public class MapExample {
             }
             totalScore = totalScore + num;
         }
-
         totalScore = totalScore / map.size();
 
         System.out.println("평균 점수: " + totalScore);
