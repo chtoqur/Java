@@ -24,7 +24,6 @@ public class PrintApp {
         // ==> 인터페이스를 익명 객체로 구현하는 것
 
         Printable prn3 = new Printable() {
-
             @Override
             public void print(String str)
             {
@@ -38,7 +37,6 @@ public class PrintApp {
         // 일종의 재정의, 클래스 전체를 재정의하는 것
         // ==> Printer 클래스 전체를 재정의 ==> 잘 사용하지 않음
         Printable prn4 = new Printer() {
-
             @Override
             public void print(String str)
             {
